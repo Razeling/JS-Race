@@ -1,5 +1,6 @@
 let numberOfCars = 0;
 let distance = 0;
+let cars = [];
 
 function getUserInput(){
     do {
@@ -35,7 +36,31 @@ class Car {
     }
 }
 
-console.log(new Car(5));
+function drawCars(amount){
+    for (let i = 0; i < amount; i++){
+        cars.push(new Car(i));
+    }
+    cars.forEach((car) => {
+        const newCar = document.createElement('div');
+        newCar.classList.add('car');
+        newCar.style.top = 60 * car.id + 'px';
+        document.querySelector('body').append(newCar);
+    });
+}
+
+function drawFinishLine(amountOfCars, distanceToCover) {
+    const finishLine = document.createElement('div');
+    finishLine.classList.add('finishLine');
+    finishLine.style.height = 60 * amountOfCars + 'px';
+    finishLine.style.left = 100 + distanceToCover + 'px';
+    document.querySelector('body').append(finishLine);
+}
+
+
+
+
 
 getUserInput();
-console.log(numberOfCars,distance);
+drawCars(numberOfCars);
+drawFinishLine(numberOfCars, distance);
+console.log(cars);
