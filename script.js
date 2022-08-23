@@ -56,11 +56,32 @@ function drawFinishLine(amountOfCars, distanceToCover) {
     document.querySelector('body').append(finishLine);
 }
 
+function pace(){
+    cars.forEach((car) => {
+        const increment = Math.random() * 6;
+        if (Math.random() > 0.5) {
+            car.accelerate(increment);
+        } else {
+            car.slowdown(increment);
+        }
+        console.log(car.speed);
+    });
+}
 
-
+function move() {
+    cars.forEach((car) => {
+        car.move();
+        document.querySelectorAll('.car')[car.id].style.left = car.distance + 'px';
+        console.log(car.distance);
+    });
+}
 
 
 getUserInput();
 drawCars(numberOfCars);
 drawFinishLine(numberOfCars, distance);
+pace();
+
+let paceInterval = setInterval(pace, 2000);
+let moveInterval = setInterval(move, 500);
 console.log(cars);
